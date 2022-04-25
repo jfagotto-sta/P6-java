@@ -1,92 +1,103 @@
 package com.OcProject.PayMyBuddy.model;
 
-public class Transaction {
+import java.io.Serializable;
+import java.util.Date;
 
-    private int transactionID;
-    private int amount;
-    private String dateOfTransaction;
-    private String senderID;
-    private String recipientID;
-    private String senderIBAN;
-    private String recipientIBAN;
-    private int commissionAmount;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-    public Transaction(int transactionID, int amount, String dateOfTransaction, String senderID, String recipientID, String senderIBAN, String recipientIBAN, int commissionAmount) {
-        this.transactionID = transactionID;
-        this.amount = amount;
-        this.dateOfTransaction = dateOfTransaction;
-        this.senderID = senderID;
-        this.recipientID = recipientID;
-        this.senderIBAN = senderIBAN;
-        this.recipientIBAN = recipientIBAN;
-        this.commissionAmount = commissionAmount;
-    }
+@Entity
+@Table(name = "TRANSACTIONS")
+public class Transaction implements Serializable {
 
-    public Transaction() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idTransaction")
+	private long transactionID;
 
-    }
+	@Column(name = "amount", precision = 15, scale = 2, nullable = false)
+	private long amount;
 
-    public int getTransactionID() {
-        return transactionID;
-    }
+	@Column(name = "date", nullable = false)
+	private Date dateOfTransaction;
 
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
-    }
+	@ManyToOne
+	@JoinColumn(name = "idSender")
+	private User sender;
 
-    public int getAmount() {
-        return amount;
-    }
+	@ManyToOne
+	@JoinColumn(name = "idRecipient")
+	private User recipient;
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
+	@Column(name = "fees", precision = 12, scale = 2)
+	private double fees;
 
-    public String getDateOfTransaction() {
-        return dateOfTransaction;
-    }
+	public Transaction(long transactionID, long amount, Date dateOfTransaction, User sender, User recipient,
+			double fees) {
+		this.transactionID = transactionID;
+		this.amount = amount;
+		this.dateOfTransaction = dateOfTransaction;
+		this.sender = sender;
+		this.recipient = recipient;
+		this.fees = fees;
+	}
 
-    public void setDateOfTransaction(String dateOfTransaction) {
-        this.dateOfTransaction = dateOfTransaction;
-    }
+	public long getTransactionID() {
+		return transactionID;
+	}
 
-    public String getSenderID() {
-        return senderID;
-    }
+	public void setTransactionID(long transactionID) {
+		this.transactionID = transactionID;
+	}
 
-    public void setSenderID(String senderID) {
-        this.senderID = senderID;
-    }
+	public long getAmount() {
+		return amount;
+	}
 
-    public String getRecipientID() {
-        return recipientID;
-    }
+	public void setAmount(long amount) {
+		this.amount = amount;
+	}
 
-    public void setRecipientID(String recipientID) {
-        this.recipientID = recipientID;
-    }
+	public Date getDateOfTransaction() {
+		return dateOfTransaction;
+	}
 
-    public String getSenderIBAN() {
-        return senderIBAN;
-    }
+	public void setDateOfTransaction(Date dateOfTransaction) {
+		this.dateOfTransaction = dateOfTransaction;
+	}
 
-    public void setSenderIBAN(String senderIBAN) {
-        this.senderIBAN = senderIBAN;
-    }
+	public User getSender() {
+		return sender;
+	}
 
-    public String getRecipientIBAN() {
-        return recipientIBAN;
-    }
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
 
-    public void setRecipientIBAN(String recipientIBAN) {
-        this.recipientIBAN = recipientIBAN;
-    }
+	public User getRecipient() {
+		return recipient;
+	}
 
-    public int getCommissionAmount() {
-        return commissionAmount;
-    }
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
+	}
 
-    public void setCommissionAmount(int commissionAmount) {
-        this.commissionAmount = commissionAmount;
-    }
+	public double getFees() {
+		return fees;
+	}
+
+	public void setFees(double fees) {
+		this.fees = fees;
+	}
+
 }
