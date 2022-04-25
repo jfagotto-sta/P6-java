@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TRANSACTIONS")
+@Table(name = "transactions")
 public class Transaction implements Serializable {
 
 	/**
@@ -23,7 +23,7 @@ public class Transaction implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTransaction")
-	private long transactionID;
+	private Long idTransaction;
 
 	@Column(name = "amount", precision = 15, scale = 2, nullable = false)
 	private long amount;
@@ -42,9 +42,9 @@ public class Transaction implements Serializable {
 	@Column(name = "fees", precision = 12, scale = 2)
 	private double fees;
 
-	public Transaction(long transactionID, long amount, Date dateOfTransaction, User sender, User recipient,
+	public Transaction(Long idTransaction, long amount, Date dateOfTransaction, User sender, User recipient,
 			double fees) {
-		this.transactionID = transactionID;
+		this.idTransaction = idTransaction;
 		this.amount = amount;
 		this.dateOfTransaction = dateOfTransaction;
 		this.sender = sender;
@@ -52,12 +52,15 @@ public class Transaction implements Serializable {
 		this.fees = fees;
 	}
 
-	public long getTransactionID() {
-		return transactionID;
+	public Transaction() {
 	}
 
-	public void setTransactionID(long transactionID) {
-		this.transactionID = transactionID;
+	public Long getIdTransaction() {
+		return idTransaction;
+	}
+
+	public void setIdTransaction(Long idTransaction) {
+		this.idTransaction = idTransaction;
 	}
 
 	public long getAmount() {

@@ -46,7 +46,7 @@ public class User implements Serializable {
 
 	}
 
-	public User(int userId, String lastName, String firstName, String mail, String password, double balance) {
+	public User(long userId, String lastName, String firstName, String mail, String password, double balance) {
 		super();
 		this.userId = userId;
 		this.lastName = lastName;
@@ -60,7 +60,7 @@ public class User implements Serializable {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
