@@ -2,12 +2,14 @@ package com.OcProject.PayMyBuddy.repository;
 
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.repository.IRepository.IUserRepository;
+import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+@Repository
 public class UserRepository implements IUserRepository {
 
 

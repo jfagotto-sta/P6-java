@@ -1,7 +1,9 @@
 package com.OcProject.PayMyBuddy.services.ServiceInterface;
 
 import com.OcProject.PayMyBuddy.model.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface IUserService {
 
     public User createANewUser(User user);
