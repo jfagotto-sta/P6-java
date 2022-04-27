@@ -13,5 +13,5 @@ public interface ITransactionRepository {
 
     boolean updateATransaction(Transaction transaction, long transactionID);
 
-    boolean deleteATransaction(long transationId);
+    boolean deleteATransaction(int transationId);
 }

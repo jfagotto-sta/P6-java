@@ -8,6 +8,7 @@
             <class>com.OcProject.PayMyBuddy.model.Contact</class>
             <class>com.OcProject.PayMyBuddy.model.ContactId</class>
             <class>com.OcProject.PayMyBuddy.model.Transaction</class>
+            <class>com.OcProject.PayMyBuddy.dao.DatabaseConnection</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/paymybuddy" />

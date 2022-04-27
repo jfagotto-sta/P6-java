@@ -23,7 +23,7 @@ public class Transaction implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTransaction")
-	private Long idTransaction;
+	private int idTransaction;
 
 	@Column(name = "amount", precision = 15, scale = 2, nullable = false)
 	private long amount;
@@ -42,7 +42,7 @@ public class Transaction implements Serializable {
 	@Column(name = "fees", precision = 12, scale = 2)
 	private double fees;
 
-	public Transaction(Long idTransaction, long amount, Date dateOfTransaction, User sender, User recipient,
+	public Transaction(int idTransaction, long amount, Date dateOfTransaction, User sender, User recipient,
 			double fees) {
 		this.idTransaction = idTransaction;
 		this.amount = amount;
@@ -55,11 +55,11 @@ public class Transaction implements Serializable {
 	public Transaction() {
 	}
 
-	public Long getIdTransaction() {
+	public int getIdTransaction() {
 		return idTransaction;
 	}
 
-	public void setIdTransaction(Long idTransaction) {
+	public void setIdTransaction(int idTransaction) {
 		this.idTransaction = idTransaction;
 	}
 

@@ -12,9 +12,9 @@ public interface ITransactionService {
     public Transaction findATransaction (long transactionId);
     
     public Transaction updateATransaction (Transaction transaction);
-    
-    public boolean deleteATransaction(long transactionID);
-    
+
+    boolean deleteATransaction(int transactionID);
+
     public List<Transaction> getAllTransaction();
     
     public List<Transaction> getAllTransactionForGivenUser(User user);

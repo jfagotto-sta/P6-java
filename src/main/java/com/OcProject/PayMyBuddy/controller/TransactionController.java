@@ -30,7 +30,6 @@ public class TransactionController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
     public Transaction createANewTransaction(@RequestBody Transaction transaction) {
-    	
     	User u = new User();
     	u.setUserId(1);
     	transaction.setRecipient(u);

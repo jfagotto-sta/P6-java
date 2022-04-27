@@ -15,20 +15,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "APPUSERS")
-public class User implements Serializable {
+public class User extends Infos implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idAppUser")
-	private long userId;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "idAppUser")
+//	private long userId;
 
-	@Column(name = "lastName", length = 50, nullable = false)
-	private String lastName;
+//	@Column(name = "lastName", length = 50, nullable = false)
+//	private String lastName;
 
-	@Column(name = "firstName", length = 50, nullable = false)
-	private String firstName;
+//	@Column(name = "firstName", length = 50, nullable = false)
+//	private String firstName;
 
 	@Column(name = "mail", length = 100, nullable = false)
 	private String mail;
@@ -40,45 +40,20 @@ public class User implements Serializable {
 	private double balance;
 
 //	@ManyToMany(fetch = FetchType.EAGER)
-//	private List<User> listOfFriends;
+//	private List<Contact> listOfFriends;
+
 
 	public User() {
-
 	}
 
-	public User(long userId, String lastName, String firstName, String mail, String password, double balance) {
-		super();
-		this.userId = userId;
-		this.lastName = lastName;
-		this.firstName = firstName;
+	public User(int userId, String lastName, String firstName, String mail, String password, double balance) {
+		super(userId, lastName, firstName);
+
 		this.mail = mail;
 		this.password = password;
 		this.balance = balance;
 	}
 
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
 
 	public String getMail() {
 		return mail;
@@ -104,10 +79,7 @@ public class User implements Serializable {
 		this.balance = balance;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(balance, firstName, lastName, mail, password, userId);
-	}
+
 
 	@Override
 	public boolean equals(Object obj) {

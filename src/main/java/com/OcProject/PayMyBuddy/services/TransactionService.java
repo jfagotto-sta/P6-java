@@ -27,8 +27,9 @@ public class TransactionService implements ITransactionService {
 		return (Transaction) DatabaseConnection.merge(transaction);
 	}
 
+
 	@Override
-	public boolean deleteATransaction(long transactionID) {
+	public boolean deleteATransaction(int transactionID) {
 		Transaction transaction = new Transaction();
 		transaction.setIdTransaction(transactionID);
 		return DatabaseConnection.remove(transaction);
