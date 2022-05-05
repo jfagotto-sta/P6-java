@@ -21,18 +21,18 @@ public class UserController {
     }
 
 
-    @PostMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(code = HttpStatus.OK)
-    public User createANewUser(@RequestBody User user) {
-        return userService.save(user);
-    }
+//    @PostMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(code = HttpStatus.OK)
+//    public User createANewUser(@RequestBody User user) {
+//        return userService.save(user);
+//    }
 
     @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
-    public User findAUser (@RequestParam String mail) {
-        return userService.getUserByMail(mail);
+    public Iterable<User> getAllUsers () {
+        return userService.getUsers();
     }
 
 //    @PutMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
