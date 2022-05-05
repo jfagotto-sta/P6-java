@@ -1,65 +1,73 @@
-//package com.OcProject.PayMyBuddy.repository;
-//
-//import com.OcProject.PayMyBuddy.model.Transaction;
-//import com.OcProject.PayMyBuddy.repository.IRepository.ITransactionRepository;
-//import org.springframework.stereotype.Repository;
-//
-//import static com.OcProject.PayMyBuddy.repository.UserRepository.em;
-//
-//@Repository
-//public class TransactionRepository implements ITransactionRepository {
-//
-//
-//    @Override
-//    public Transaction createANewTransaction(Transaction transaction) {
-//
-//        em.getTransaction().begin();
-//        em.persist(transaction);
-//        em.getTransaction().commit();
-//
-//        return transaction;
-//    }
-//
-//    @Override
-//    public Transaction findATransaction(long transactionID) {
-//       Transaction transaction = em.find(Transaction.class, transactionID);
-//        return transaction;
-//    }
-//
-//    @Override
-//    public boolean updateATransaction(Transaction transaction, long transactionID) {
-//
-//        em.getTransaction().begin();
-//
-//        Transaction transactionToUpdate = em.find(Transaction.class, transactionID);
-//
-//        transactionToUpdate.setTransactionID(transactionID);
-//        transactionToUpdate.setDateOfTransaction(transaction.getDateOfTransaction());
-//        transactionToUpdate.setAmount(transaction.getAmount());
-//        transactionToUpdate.setFees(transaction.getFees());
-//        transactionToUpdate.setRecipient(transaction.getRecipient());
-//        transactionToUpdate.setSender(transaction.getSender());
-//
-//        em.getTransaction().commit();
-//
-//        return true;
-//
-//    }
-//
-//    @Override
-//    public boolean deleteATransaction(long transationId) {
-//
-//        em.getTransaction().begin();
-//
-//        Transaction userToDelete = em.find(Transaction.class, transationId);
-//
-//        em.remove(userToDelete);
-//
-//        em.getTransaction().commit();
-//
-//        return true;
-//    }
-//
-//
-//
-//}
+package com.OcProject.PayMyBuddy.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.OcProject.PayMyBuddy.model.Transaction;
+
+import java.util.Optional;
+
+@Repository
+public class TransactionRepository implements CrudRepository<Transaction, Integer>{
+
+
+    @Override
+    public <S extends Transaction> S save(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Transaction> Iterable<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public Optional<Transaction> findById(Integer integer) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Integer integer) {
+        return false;
+    }
+
+    @Override
+    public Iterable<Transaction> findAll() {
+        return null;
+    }
+
+    @Override
+    public Iterable<Transaction> findAllById(Iterable<Integer> integers) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+
+    }
+
+    @Override
+    public void delete(Transaction entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Integer> integers) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Transaction> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+}

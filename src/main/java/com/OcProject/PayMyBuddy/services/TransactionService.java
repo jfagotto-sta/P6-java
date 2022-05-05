@@ -1,47 +1,80 @@
 package com.OcProject.PayMyBuddy.services;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.OcProject.PayMyBuddy.repository.TransactionRepository;
+import com.OcProject.PayMyBuddy.services.ServiceInterface.ITransactionServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.OcProject.PayMyBuddy.dao.DatabaseConnection;
 import com.OcProject.PayMyBuddy.model.Transaction;
 import com.OcProject.PayMyBuddy.model.User;
-import com.OcProject.PayMyBuddy.services.ServiceInterface.ITransactionService;
+
 
 @Service
-public class TransactionService implements ITransactionService {
+public class TransactionService implements ITransactionServices {
 
-	@Override
-	public Transaction createANewTransaction(Transaction transaction) {
-		return (Transaction) DatabaseConnection.persist(transaction);
-	}
+    @Autowired
+    private TransactionRepository transactionRepo;
 
-	@Override
-	public Transaction findATransaction(long transactionId) {
-		return DatabaseConnection.find(Transaction.class, transactionId);
-	}
+    @Override
+    public <S extends Transaction> S save(S entity) {
+        return transactionRepo.save(entity);
+    }
 
-	@Override
-	public Transaction updateATransaction(Transaction transaction) {
-		return (Transaction) DatabaseConnection.merge(transaction);
-	}
+    @Override
+    public <S extends Transaction> Iterable<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
 
+    @Override
+    public Optional<Transaction> findById(Integer integer) {
+        return Optional.empty();
+    }
 
-	@Override
-	public boolean deleteATransaction(int transactionID) {
-		Transaction transaction = new Transaction();
-		transaction.setIdTransaction(transactionID);
-		return DatabaseConnection.remove(transaction);
-	}
+    @Override
+    public boolean existsById(Integer integer) {
+        return false;
+    }
 
-	@Override
-	public List<Transaction> getAllTransaction() {
-		return DatabaseConnection.loadAll(Transaction.class);
-	}
+    @Override
+    public Iterable<Transaction> findAll() {
+        return null;
+    }
 
-	@Override
-	public List<Transaction> getAllTransactionForGivenUser(User user) {
-		return null;
-	}
+    @Override
+    public Iterable<Transaction> findAllById(Iterable<Integer> integers) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+
+    }
+
+    @Override
+    public void delete(Transaction entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Integer> integers) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Transaction> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
 }

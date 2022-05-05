@@ -3,15 +3,9 @@ package com.OcProject.PayMyBuddy.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Access(AccessType.FIELD)
 @Entity
 @Table(name = "transactions")
 public class Transaction implements Serializable {
@@ -26,9 +20,9 @@ public class Transaction implements Serializable {
 	private int idTransaction;
 
 	@Column(name = "amount", precision = 15, scale = 2, nullable = false)
-	private long amount;
+	private float amount;
 
-	@Column(name = "date", nullable = false)
+	@Column(name = "dateTransaction", nullable = false)
 	private Date dateOfTransaction;
 
 	@ManyToOne
@@ -42,7 +36,7 @@ public class Transaction implements Serializable {
 	@Column(name = "fees", precision = 12, scale = 2)
 	private double fees;
 
-	public Transaction(int idTransaction, long amount, Date dateOfTransaction, User sender, User recipient,
+	public Transaction(int idTransaction, float amount, Date dateOfTransaction, User sender, User recipient,
 			double fees) {
 		this.idTransaction = idTransaction;
 		this.amount = amount;
@@ -63,11 +57,11 @@ public class Transaction implements Serializable {
 		this.idTransaction = idTransaction;
 	}
 
-	public long getAmount() {
+	public float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(long amount) {
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
 

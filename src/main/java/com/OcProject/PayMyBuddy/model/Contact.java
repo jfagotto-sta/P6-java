@@ -18,13 +18,16 @@ public class Contact implements Serializable {
 	@EmbeddedId
 	private ContactId contactId;
 
-	@Column(name = "date")
+	@Column(name = "dateAction")
 	private Date date;
 
 	public Contact(ContactId contactId, Date date) {
 		super();
 		this.contactId = contactId;
 		this.date = date;
+	}
+
+	public Contact() {
 	}
 
 	public ContactId getContactId() {

@@ -25,6 +25,9 @@ public class ContactId implements Serializable {
 		this.user2 = user2;
 	}
 
+	public ContactId() {
+	}
+
 	public User getUser1() {
 		return user1;
 	}

@@ -1,31 +1,38 @@
-package com.OcProject.PayMyBuddy.services;
+package com.OcProject.PayMyBuddy.repository;
 
-import com.OcProject.PayMyBuddy.services.ServiceInterface.IUserServices;
+import com.OcProject.PayMyBuddy.services.UserService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.slf4j.ILoggerFactory;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.OcProject.PayMyBuddy.model.User;
-import com.OcProject.PayMyBuddy.repository.UserRepository;
 
 import java.util.Optional;
 
-@Service
-public class UserService implements IUserServices {
 
-	private final Logger logger = Logger.getLogger(this.getClass());
-	
-	@Autowired
-	private UserRepository userRepo;
 
-	
-	public User getUserByMail(String mail) {
-		return userRepo.findByMail(mail);
+@Repository
+public class UserRepository implements CrudRepository<User, Integer>{
+
+
+	private final org.apache.log4j.Logger logger = Logger.getLogger(this.getClass());
+
+	public User findByMail(String email){
+		return null;
 	}
 
 	@Override
-	public User save(User user) {
-		return userRepo.save(user);
+	public User save(User user){
+		User existingUser = findByMail(user.getMail());
+		if(existingUser != null) {
+			logger.info("Mail deja existant");
+			return null;
+			//throw
+		}
+
+		//d'autres verifications
+		return save(user);
 	}
 
 	@Override
