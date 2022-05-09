@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,13 @@ public class UserService  {
 	@Autowired
 	private UserRepository userRepo;
 
+	public User findByMail(String email) {
+		return userRepo.findByMail(email);
+	}
+	
+	public List<User> findByLastNameAndFirstName(String lastName, String firstName) {
+		return userRepo.findByLastNameAndFirstName(lastName, firstName);
+	}
 	
 	public Iterable<User> getUsers(){
 		return userRepo.findAll();

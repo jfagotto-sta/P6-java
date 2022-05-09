@@ -6,9 +6,10 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+
 @Access(AccessType.FIELD)
 @Entity
-@Table(name = "APPUSERS")
+@Table(name = "APPUSERS", uniqueConstraints = @UniqueConstraint(name = "mail unique",columnNames = "mail"))
 public class User  implements Serializable {
 
 	private static final long serialVersionUID = 1L;

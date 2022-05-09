@@ -1,5 +1,7 @@
 package com.OcProject.PayMyBuddy.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,20 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.OK)
     public Iterable<User> getAllUsers () {
         return userService.getUsers();
+    }
+    
+    @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public User getUserByMail(@RequestParam String email) {
+        return userService.findByMail(email);
+    }
+    
+    @GetMapping(path = "/user/lastNameFirstName", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<User> getUserByMail(@RequestParam String lastName, @RequestParam String firstName) {
+        return userService.findByLastNameAndFirstName(lastName, firstName);
     }
 
 //    @PutMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,

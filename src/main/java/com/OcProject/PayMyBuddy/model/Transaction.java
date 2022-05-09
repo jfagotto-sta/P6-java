@@ -1,5 +1,7 @@
 package com.OcProject.PayMyBuddy.model;
 
+import org.springframework.data.jpa.repository.Temporal;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,7 +24,9 @@ public class Transaction implements Serializable {
 	@Column(name = "amount", precision = 15, scale = 2, nullable = false)
 	private float amount;
 
+
 	@Column(name = "dateTransaction", nullable = false)
+	//@Temporal(TemporalType.DATE)
 	private Date dateOfTransaction;
 
 	@ManyToOne

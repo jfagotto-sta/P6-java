@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+//@IdClass(ContactId.class)
 @Entity
-@Table(name = "contacts")
+@Table(name = "contact")
 public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
