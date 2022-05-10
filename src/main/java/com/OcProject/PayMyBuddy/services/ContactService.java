@@ -33,4 +33,12 @@ public class ContactService  {
 		contactRepository.delete(user);
 	}
 
+	public void deleteById(ContactId id){
+		contactRepository.deleteById(id);
+	}
+
+	public Optional<Contact> getById(ContactId id){
+		return contactRepository.findById(id);
+	}
+
 }

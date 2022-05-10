@@ -1,9 +1,9 @@
 package com.OcProject.PayMyBuddy.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,21 +23,21 @@ public class UserController {
     }
 
 
-//    @PostMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public User createANewUser(@RequestBody User user) {
-//        return userService.save(user);
-//    }
+    @PostMapping (path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public User createANewUser(@RequestBody User user) {
+        return userService.newUser(user);
+    }
 
-    @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public Iterable<User> getAllUsers () {
         return userService.getUsers();
     }
     
-    @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/user/mail", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public User getUserByMail(@RequestParam String email) {
@@ -51,18 +51,18 @@ public class UserController {
         return userService.findByLastNameAndFirstName(lastName, firstName);
     }
 
-//    @PutMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public boolean updateAUser (@RequestBody User user, @RequestParam long userId) {
-//        return userService.updateAUser(user, userId);
-//    }
-//
-//    @DeleteMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
-//                produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public boolean deleteAUSer(@RequestParam long userId) {
-//        return userService.deleteAUSer(userId);
-//    }
+    @GetMapping(path = "/user/id", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public Optional<User> getUserById(@RequestParam int id) {
+        return userService.getUserById(id);
+    }
+
+    @DeleteMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
+                produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public void deleteAUSer(@RequestParam int userId) {
+       userService.deleteById(userId);
+    }
 
 }

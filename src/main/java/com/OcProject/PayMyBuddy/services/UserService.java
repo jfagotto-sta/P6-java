@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.repository.UserRepository;
+import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +39,8 @@ public class UserService  {
 		return userRepo.save(user);
 	}
 
-	public void delateUser (User user){
-		userRepo.delete(user);
+	public void deleteById(Integer id){
+		userRepo.deleteById(id);
 	}
 
 }

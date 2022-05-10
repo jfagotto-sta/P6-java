@@ -32,8 +32,8 @@ public class TransactionService   {
         return transactionRepo.save(transaction);
     }
 
-    public void deleteTransaction (Transaction transaction){
-        transactionRepo.delete(transaction);
+    public void deleteById (Integer id){
+        transactionRepo.deleteById(id);
     }
 
 }
