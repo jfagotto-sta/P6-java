@@ -13,6 +13,7 @@ import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.services.UserService;
 
 @Controller
+@CrossOrigin(origins="http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -36,13 +37,47 @@ public class UserController {
     public Iterable<User> getAllUsers () {
         return userService.getUsers();
     }
-    
+
     @GetMapping(path = "/user/mail", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public User getUserByMail(@RequestParam String email) {
         return userService.findByMail(email);
     }
+
+    //fonctionne avec un LIKE
+    @GetMapping(path = "/users/contact", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public Iterable<User> getUsersByMail(@RequestParam String email) {
+        List<User> usersFilteredByMail = userService.findByLikableMail(email);
+        for (User u : usersFilteredByMail) {
+            u.setPassword(null);
+            u.setBalance(null);
+        }
+
+        return usersFilteredByMail;
+    }
+
+    //SERVICE QUI GERE LA CONNEXION
+    @GetMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public User getUserFromLogin(@RequestParam String email, @RequestParam String password) {
+        return userService.findByMailAndPassword(email, password);
+    }
+    
+    @GetMapping(path = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+    public User getMessage() {
+    	User u = new User();
+    	u.setFirstName("test");
+    	u.setLastName("michel");
+    	u.setBalance(18d);
+    	return u;
+    }
+    
     
     @GetMapping(path = "/user/lastNameFirstName", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -64,5 +99,7 @@ public class UserController {
     public void deleteAUSer(@RequestParam int userId) {
        userService.deleteById(userId);
     }
+
+
 
 }

@@ -1,16 +1,24 @@
 package com.OcProject.PayMyBuddy.ControllerTestCase;
 
 import com.OcProject.PayMyBuddy.model.Contact;
+import com.OcProject.PayMyBuddy.model.ContactId;
 import com.OcProject.PayMyBuddy.model.User;
+import com.OcProject.PayMyBuddy.services.ContactService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,10 +29,30 @@ public class ContactControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private ContactService contactService;
+
 
     @Test
     public void getContacts() throws Exception {
-        mockMvc.perform(get("/contact")).andExpect(status().isOk());
+
+//        User user1 = new User(1,"fagotto1","joffrey1","jfag@gmail.com","545454",80);
+ //       User user2 = new User(1,"fagotto1","joffrey1","jf@gmail.com","12345",50);
+//
+//        ContactId contactId1 = new ContactId(user1,user2);
+//        ContactId contactId2 = new ContactId(user1,user2);
+
+
+ //       List<Contact> listOfContacts = new ArrayList<>();
+//        Date date = new Date();
+
+ //       Contact contact1 = new Contact(contactId1,date);
+//
+ //       listOfContacts.add(contact1);
+//
+//(contactService.getContacts()).thenReturn(listOfContacts);
+
+   //     mockMvc.perform(get("/contact").contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk());
 
     }
 
@@ -36,7 +64,8 @@ public class ContactControllerTest {
 
     @Test
     public void delateUserUsingId() throws Exception {
-        mockMvc.perform(delete("/contact/id").contentType(MediaType.APPLICATION_JSON_VALUE).param("id","1")).andExpect(status().isOk())               .andExpect(status().isOk());
+        mockMvc.perform(delete("/contact/id").contentType(MediaType.APPLICATION_JSON_VALUE).param("id","1")).andExpect(status().isOk())
+                .andExpect(status().isOk());
     }
 
 

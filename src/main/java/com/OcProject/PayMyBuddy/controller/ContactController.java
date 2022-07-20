@@ -28,8 +28,8 @@ public class ContactController {
     @PostMapping (path = "/contact", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
-    public Contact createANewUser(@RequestBody Contact contact) {
-        return contactService.addContact(contact);
+    public Contact createANewContact(@RequestParam String mail1, @RequestParam String mail2) {
+        return contactService.addContact(mail1, mail2);
     }
 
     @GetMapping(path = "/contact", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,8 +42,9 @@ public class ContactController {
     @GetMapping(path = "/contact/id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
-    public Optional<Contact> getContactById(@RequestParam ContactId id) {
-        return contactService.getById(id);
+    public Iterable<Contact> getContactById(@RequestParam ContactId id) {
+        //return contactService.getById(id);
+    	return null;
     }
 
 

@@ -45,11 +45,11 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-    @DeleteMapping (path = "/transaction/id", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(code = HttpStatus.OK)
-    public void deleteAUSer(@RequestParam int transactionId) {
-        transactionService.deleteById(transactionId);
-    }
+//    @DeleteMapping (path = "/transaction/id", consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(code = HttpStatus.OK)
+//    public void deleteAUSer(@RequestParam int transactionId) {
+//        transactionService.deleteById(transactionId);
+//    }
 
 }

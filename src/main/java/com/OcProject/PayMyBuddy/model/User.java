@@ -2,7 +2,6 @@ package com.OcProject.PayMyBuddy.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -15,9 +14,8 @@ public class User  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idAppUser")
-	private int userId;
+	@Column(name = "mail", length = 100, nullable = false)
+	private String mail;
 
 	@Column(name = "lastName", length = 50, nullable = false)
 	private String lastName;
@@ -25,14 +23,13 @@ public class User  implements Serializable {
 	@Column(name = "firstName", length = 50, nullable = false)
 	private String firstName;
 
-	@Column(name = "mail", length = 100, nullable = false)
-	private String mail;
-
 	@Column(name = "password", length = 20, nullable = false)
 	private String password;
 
 	@Column(name = "balance", precision = 15, scale = 2, nullable = false)
-	private double balance;
+	private Double balance;
+
+
 
 //	@ManyToMany(fetch = FetchType.EAGER)
 //	private List<Contact> listOfFriends;
@@ -41,8 +38,7 @@ public class User  implements Serializable {
 	public User() {
 	}
 
-	public User(int userId, String lastName, String firstName, String mail, String password, double balance) {
-		this.userId = userId;
+	public User(String lastName, String firstName, String mail, String password, double balance) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.mail = mail;
@@ -50,13 +46,12 @@ public class User  implements Serializable {
 		this.balance = balance;
 	}
 
-	public long getUserId() {
-		return userId;
+	public User(String mail, String lastName, String firstName) {
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.mail = mail;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public String getLastName() {
 		return lastName;
@@ -90,11 +85,19 @@ public class User  implements Serializable {
 		this.password = password;
 	}
 
-	public double getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
+
+//	public List<Contact> getListOfFriends() {
+//		return listOfFriends;
+//	}
+//
+//	public void setListOfFriends(List<Contact> listOfFriends) {
+//		this.listOfFriends = listOfFriends;
+//	}
 }
