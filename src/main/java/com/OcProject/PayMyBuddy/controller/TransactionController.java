@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.OcProject.PayMyBuddy.model.User;
 
-@Controller
+@RestController
 public class TransactionController {
 
     @Autowired
@@ -24,12 +24,12 @@ public class TransactionController {
     }
 
 
-    @PostMapping (path = "/transaction", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(code = HttpStatus.OK)
-    public Transaction createANewUser(@RequestBody Transaction transaction) {
-        return transactionService.newTransaction(transaction);
-    }
+//    @PostMapping (path = "/transaction", consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(code = HttpStatus.OK)
+//    public Transaction createANewUser(@RequestBody Transaction transaction) {
+//        return transactionService.newTransaction(transaction);
+//    }
 
     @GetMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

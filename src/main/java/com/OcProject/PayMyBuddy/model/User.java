@@ -1,5 +1,7 @@
 package com.OcProject.PayMyBuddy.model;
 
+import org.springframework.context.annotation.Primary;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,22 +10,23 @@ import javax.persistence.*;
 
 @Access(AccessType.FIELD)
 @Entity
-@Table(name = "APPUSERS", uniqueConstraints = @UniqueConstraint(name = "mail unique",columnNames = "mail"))
+@Table(name = "appusers", uniqueConstraints = @UniqueConstraint(name = "mail unique",columnNames = "mail"))
 public class User  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+
 	@Id
-	@Column(name = "mail", length = 100, nullable = false)
+	@Column(name = "mail", length = 255, nullable = false)
 	private String mail;
 
-	@Column(name = "lastName", length = 50, nullable = false)
+	@Column(name = "lastname", length = 50, nullable = false)
 	private String lastName;
 
-	@Column(name = "firstName", length = 50, nullable = false)
+	@Column(name = "firstname", length = 50, nullable = false)
 	private String firstName;
 
-	@Column(name = "password", length = 20, nullable = false)
+	@Column(name = "password", length = 50, nullable = false)
 	private String password;
 
 	@Column(name = "balance", precision = 15, scale = 2, nullable = false)

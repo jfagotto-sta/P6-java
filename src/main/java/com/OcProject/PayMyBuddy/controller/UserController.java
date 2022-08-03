@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.services.UserService;
 
-@Controller
+@RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class UserController {
 
@@ -51,10 +51,15 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.OK)
     public Iterable<User> getUsersByMail(@RequestParam String email) {
         List<User> usersFilteredByMail = userService.findByLikableMail(email);
+        User doublon = null;
         for (User u : usersFilteredByMail) {
             u.setPassword(null);
             u.setBalance(null);
+            if(u.getMail().equals(email)) {
+                doublon = u;
+            }
         }
+        usersFilteredByMail.remove(doublon);
 
         return usersFilteredByMail;
     }

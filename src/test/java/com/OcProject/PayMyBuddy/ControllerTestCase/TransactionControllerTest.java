@@ -35,37 +35,37 @@ public class TransactionControllerTest {
     private TransactionService transactionService;
 
 
-    @Test
-    public void postATransaction() {
-        User user1 = new User();
-        User user2 = new User();
-
-
-        Transaction transaction = new Transaction();
-        transaction.setFees(1);
-        transaction.setDateOfTransaction(new Date());
-        transaction.setIdTransaction(1);
-        transaction.setSender(user1);
-        transaction.setRecipient(user2);
-        transaction.setAmount(500);
-
-        when(transactionService.newTransaction(transaction)).thenReturn(transaction);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        String p = null;
-        try {
-            p = objectMapper.writeValueAsString(transaction);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            mockMvc.perform(post("/transaction").contentType(MediaType.APPLICATION_JSON_VALUE).content(p))
-                    .andExpect(status().isOk());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    public void postATransaction() {
+//        User user1 = new User();
+//        User user2 = new User();
+//
+//
+//        Transaction transaction = new Transaction();
+//        transaction.setFees(1);
+//        transaction.setDateOfTransaction(new Date());
+//        transaction.setIdTransaction(1);
+//        transaction.setSender(user1);
+//        transaction.setRecipient(user2);
+//        transaction.setAmount(500);
+//
+//        when(transactionService.newTransaction(transaction)).thenReturn(transaction);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String p = null;
+//        try {
+//            p = objectMapper.writeValueAsString(transaction);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            mockMvc.perform(post("/transaction").contentType(MediaType.APPLICATION_JSON_VALUE).content(p))
+//                    .andExpect(status().isOk());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Test
     public void getTransactions() throws Exception {

@@ -1,7 +1,6 @@
 package com.OcProject.PayMyBuddy.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -19,13 +18,12 @@ public class ContactId implements Serializable {
 	@Column(name = "user2")
 	private String user2;
 
-	public ContactId(String user1, String user2) {
-		super();
-		this.user1 = user1;
-		this.user2 = user2;
+	public ContactId() {
 	}
 
-	public ContactId() {
+	public ContactId(String mail1, String mail2) {
+		this.user1 = mail1;
+		this.user2 = mail2;
 	}
 
 	public String getUser1() {
@@ -43,22 +41,4 @@ public class ContactId implements Serializable {
 	public void setUser2(String user2) {
 		this.user2 = user2;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(user1, user2);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContactId other = (ContactId) obj;
-		return Objects.equals(user1, other.user1) && Objects.equals(user2, other.user2);
-	}
-
 }
