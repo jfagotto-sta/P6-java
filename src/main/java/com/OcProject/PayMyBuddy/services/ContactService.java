@@ -68,13 +68,12 @@ public class ContactService  {
 		contactRepository.delete(user);
 	}
 
-	public void deleteById(ContactId id){
+	public boolean deleteById(ContactId id){
 		contactRepository.deleteById(id);
+		return true;
 	}
 
-//	public Iterable<Contact> getById(ContactId id){
-//		return contactRepository.findById(id);
-//	}
+
 	
 	public List<Contact> findByLastNameAndFirstName(String lastName, String firstName) {
 		//return contactRepository.findByLastNameAndFirstName(lastName, firstName);
@@ -105,8 +104,6 @@ public class ContactService  {
 		return contactsBean;
 	}
 
-//	public List<Contact> findListIfFriends(String mail){
-//		//contactRepository.findByMail()
-//	}
+
 
 }

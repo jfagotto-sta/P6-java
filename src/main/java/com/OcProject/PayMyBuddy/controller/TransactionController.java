@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.OcProject.PayMyBuddy.model.Transaction;
+
+import com.OcProject.PayMyBuddy.model.TransactionBean;
 import com.OcProject.PayMyBuddy.services.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import com.OcProject.PayMyBuddy.model.User;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 public class TransactionController {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private TransactionService transactionService;
@@ -24,12 +31,12 @@ public class TransactionController {
     }
 
 
-//    @PostMapping (path = "/transaction", consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public Transaction createANewUser(@RequestBody Transaction transaction) {
-//        return transactionService.newTransaction(transaction);
-//    }
+    @PostMapping (path = "/transaction", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public TransactionBean newTransaction(@RequestBody TransactionBean transaction) {
+        return transactionService.makeATransaction(transaction);
+    }
 
     @GetMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

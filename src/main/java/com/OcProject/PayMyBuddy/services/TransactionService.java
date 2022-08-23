@@ -2,7 +2,9 @@ package com.OcProject.PayMyBuddy.services;
 
 import java.util.Optional;
 
+
 import com.OcProject.PayMyBuddy.exceptions.TransactionException;
+import com.OcProject.PayMyBuddy.model.TransactionBean;
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.repository.TransactionRepository;
 import com.OcProject.PayMyBuddy.repository.UserRepository;
@@ -16,13 +18,10 @@ import com.OcProject.PayMyBuddy.model.Transaction;
 
 
 @Service
-public class TransactionService   {
+public class TransactionService {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private BankService bankService;
 
 
     @Autowired
@@ -39,35 +38,27 @@ public class TransactionService   {
         return transactionRepo.findById(id);
     }
 
-//    public Transaction newTransaction(Transaction transaction){
-//    	//transaction quand elle arrive, les fees ne sont pas encore calculés
-//    	transaction.setFees(TransactionUtils.calculateFess(transaction));
-//        return transactionRepo.save(transaction);
-//    }
 
-//    public Optional<Transaction> deleteById (Integer id){
-//
-//      Optional<Transaction> transaction = Optional.of(new Transaction());
-//       transaction = transactionRepo.findById(id);
-//       transactionRepo.deleteById(id);
-//        return transaction;
-//    }
+    public TransactionBean makeATransaction(TransactionBean transactionBean) {
 
 
-
-    public void makeATransaction(double amount, User user1, User user2) {
+        User user1 = userService.findByMail(transactionBean.getMail1());
+        User user2 = userService.findByMail(transactionBean.getMail2());
 
         double User1Balance = user1.getBalance();
         double User2Balance = user2.getBalance();
 
 
-        if(User1Balance>amount) {
-            user1.setBalance(User1Balance - (amount + TransactionUtils.calculateFess(amount)));
-            user2.setBalance(User2Balance + amount);
-            bankService.updateBankFeesAmount(TransactionUtils.calculateFess(amount));
-        }else {
+        if (User1Balance > transactionBean.getAmount()) {
+            user1.setBalance(User1Balance - (transactionBean.getAmount() + TransactionUtils.calculateFess(transactionBean.getAmount())));
+            user2.setBalance(User2Balance + transactionBean.getAmount());
+
+            User admin = userService.findByMail("admin@admin.fr");
+            admin.setBalance(admin.getBalance()+TransactionUtils.calculateFess(transactionBean.getAmount()));
+        } else {
             TransactionException.notEnoughMoneyException("You have not enough money on your account to operate the trasanction.");
         }
 
-        }
+        return transactionBean;
     }
+}

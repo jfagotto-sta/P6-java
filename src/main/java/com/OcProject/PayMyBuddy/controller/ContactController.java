@@ -60,7 +60,7 @@ public class ContactController {
     @DeleteMapping (path = "/contact", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteAUSer(@RequestBody ContactId contactBean) {
+    public boolean deleteAUSer(@RequestBody ContactId contactBean) {
         Optional<Contact> exist = contactService.getById(contactBean);
         String mail1 = contactBean.getUser1();
         String mail2 = contactBean.getUser2();
@@ -70,6 +70,7 @@ public class ContactController {
             contactBean.setUser2(mail1);
         }
         contactService.deleteById(contactBean);
+        return true;
     }
 
 }

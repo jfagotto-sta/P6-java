@@ -7,16 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.OcProject.PayMyBuddy.model.User;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
 
-
+	@Transactional
 	public User findByMail(String email);
 	
-	public List<User> findByLastNameAndFirstName(String lastName, String firstName);
+	public User findByLastNameAndFirstName(String lastName, String firstName);
 
 	public User findByMailAndPassword(String email, String password);
 

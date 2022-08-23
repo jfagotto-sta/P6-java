@@ -34,9 +34,6 @@ public class User  implements Serializable {
 
 
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	private List<Contact> listOfFriends;
-
 
 	public User() {
 	}
@@ -96,11 +93,5 @@ public class User  implements Serializable {
 		this.balance = balance;
 	}
 
-//	public List<Contact> getListOfFriends() {
-//		return listOfFriends;
-//	}
-//
-//	public void setListOfFriends(List<Contact> listOfFriends) {
-//		this.listOfFriends = listOfFriends;
-//	}
+
 }
