@@ -22,5 +22,7 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 
 	@Query("SELECT U FROM User U WHERE LOWER(U.mail) LIKE LOWER(concat(?1, '%'))")
 	List<User> findLikeMail(String mail);
+
+
 	
 }

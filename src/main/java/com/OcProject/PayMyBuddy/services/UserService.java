@@ -41,11 +41,9 @@ public class UserService {
 		return userRepo.findAll();
 	}
 
-	public Optional<User> getUserById(Integer id) {
-		return userRepo.findById(id);
-	}
 
-	public void newUser(UserBean user) {
+
+	public UserBean newUser(UserBean user) {
 		User user1 = new User();
 		user1.setFirstName(user.getFirstName());
 		user1.setLastName(user.getLastName());
@@ -54,14 +52,21 @@ public class UserService {
 		user1.setPassword(getEncodedPassword(user.getPassword()));
 		userRepo.save(user1);
 
+		return user;
 	}
 
-	public void deleteById(Integer id) {
-		userRepo.deleteById(id);
+	public boolean delete(String mail) {
+		User user = findByMail(mail);
+		userRepo.delete(user);
+		return true;
 	}
 	
 	public User findByMailAndPassword(String email, String password) {
 		return userRepo.findByMailAndPassword(email, getEncodedPassword(password));
+	}
+
+	public User save(User user){
+		return userRepo.save(user);
 	}
 
 }

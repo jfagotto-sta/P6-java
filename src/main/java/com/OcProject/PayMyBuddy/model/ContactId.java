@@ -41,4 +41,12 @@ public class ContactId implements Serializable {
 	public void setUser2(String user2) {
 		this.user2 = user2;
 	}
+
+	@Override
+	public String toString() {
+		return "ContactId{" +
+				"user1='" + user1 + '\'' +
+				", user2='" + user2 + '\'' +
+				'}';
+	}
 }

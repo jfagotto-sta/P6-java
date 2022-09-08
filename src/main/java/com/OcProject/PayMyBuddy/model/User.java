@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Primary;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -93,5 +94,16 @@ public class User  implements Serializable {
 		this.balance = balance;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return mail.equals(user.mail);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(mail);
+	}
 }

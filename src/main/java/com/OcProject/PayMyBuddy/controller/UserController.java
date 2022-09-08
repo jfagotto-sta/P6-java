@@ -49,7 +49,6 @@ public class UserController {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public User getUserByMail(@RequestParam String email) {
-
         logger.info("Utilisateur trouvé avec le mail "+email);
         return userService.findByMail(email);
     }
@@ -78,23 +77,11 @@ public class UserController {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public User getUserFromLogin(@RequestParam String email, @RequestParam String password) {
-       // logger.info("Utilisateurs lié au mail "+email+" connecté");
-        return userService.findByMailAndPassword(email, password);
+       logger.info("Utilisateurs lié au mail "+email+" connecté");
+       return userService.findByMailAndPassword(email, password);
 
     }
-    
-    @GetMapping(path = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    @ResponseStatus(code = HttpStatus.OK)
-    public User getMessage() {
-    	User u = new User();
-    	u.setFirstName("test");
-    	u.setLastName("michel");
-    	u.setBalance(18d);
-    	return u;
 
-    }
-    
     
     @GetMapping(path = "/user/lastNameFirstName", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -104,20 +91,14 @@ public class UserController {
         return userService.findByLastNameAndFirstName(lastName, firstName);
     }
 
-    @GetMapping(path = "/user/id", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    @ResponseStatus(code = HttpStatus.OK)
-    public Optional<User> getUserById(@RequestParam int id) {
-        logger.info("Utilisateur avec l'id "+id+" chargé");
-        return userService.getUserById(id);
-    }
 
     @DeleteMapping (path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteAUSer(@RequestParam int userId) {
+    public Boolean deleteAUSer(@RequestParam String userMail) {
         logger.info("Utilisateur supprimé");
-       userService.deleteById(userId);
+       userService.delete(userMail);
+        return true;
     }
 
 

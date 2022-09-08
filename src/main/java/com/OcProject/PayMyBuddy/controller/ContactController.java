@@ -5,6 +5,8 @@ import com.OcProject.PayMyBuddy.model.Contact;
 import com.OcProject.PayMyBuddy.model.ContactBean;
 import com.OcProject.PayMyBuddy.model.ContactId;
 import com.OcProject.PayMyBuddy.services.ContactService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,8 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
     }
@@ -30,6 +34,7 @@ public class ContactController {
     @ResponseStatus(code = HttpStatus.OK)
     @ResponseBody
     public Contact createANewContact(@RequestBody ContactId contactId) throws Exception {
+        logger.info("Nouveau contact créé");
         return contactService.addContact(contactId.getUser1(), contactId.getUser2());
     }
 
@@ -37,6 +42,7 @@ public class ContactController {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public Iterable<Contact> getAllContacts () {
+        logger.info("Liste complète des contacts chargée");
         return contactService.getContacts();
     }
 
@@ -46,6 +52,7 @@ public class ContactController {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public Optional<Contact> getContactById(@RequestParam ContactId id) {
+        logger.info("Contact chargé");
         return contactService.getById(id);
     }
 
@@ -53,6 +60,7 @@ public class ContactController {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public List<ContactBean> findContactWithMail(@RequestParam String mail) {
+        logger.info("Contact chargé pour l'utilisateur avec le mail "+mail);
         return contactService.findFriends(mail);
     }
 
@@ -70,6 +78,7 @@ public class ContactController {
             contactBean.setUser2(mail1);
         }
         contactService.deleteById(contactBean);
+        logger.info("contact supprimé");
         return true;
     }
 

@@ -32,19 +32,7 @@ public class ContactService  {
 		return contactRepository.findAll();
 	}
 
-	public Optional<Contact> getContactByPrimaryKey(ContactId contactId) {
-		return contactRepository.findById(contactId);
-	}
-
 	public Contact addContact(String mail1, String mail2) throws Exception {
-		//verifier que les deux mails existent bien dans le systeme
-//		User userDemandeur = userRepo.findByMail(mail1);
-//		User userAjoutee = userRepo.findByMail(mail2);
-
-//		if(userDemandeur == null || userAjoutee == null) {
-//			System.out.println("Erreur pour trouver les users depuis leurs mails");
-//			return null;
-//		}
 
 		if(contactExistAlready(mail1,mail2)) {
 			throw new Exception("Contact exist already");
@@ -64,20 +52,10 @@ public class ContactService  {
 		return c != null;
 	}
 
-	public void deleteContact (Contact user){
-		contactRepository.delete(user);
-	}
 
 	public boolean deleteById(ContactId id){
 		contactRepository.deleteById(id);
 		return true;
-	}
-
-
-	
-	public List<Contact> findByLastNameAndFirstName(String lastName, String firstName) {
-		//return contactRepository.findByLastNameAndFirstName(lastName, firstName);
-		return null;
 	}
 
 	public Optional<Contact> getById(ContactId id) {
@@ -103,7 +81,4 @@ public class ContactService  {
 		}
 		return contactsBean;
 	}
-
-
-
 }

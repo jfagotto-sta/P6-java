@@ -35,28 +35,42 @@ public class TransactionController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
     public TransactionBean newTransaction(@RequestBody TransactionBean transaction) {
+       logger.info("nouvelle transaction effectuée par l'utilsateur" +transaction.getSender() +"d'un montant de "+transaction.getAmount() +"au profit de "+transaction.getRecipient());
         return transactionService.makeATransaction(transaction);
     }
 
+    @GetMapping(path = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.OK)
+   public Iterable<Transaction> getAllTransactions () {
+
+        logger.info("liste des transactions chargées");
+        return transactionService.getTransactions();
+    }
+
+    //fonctionne avec un LIKE
     @GetMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
-    public Iterable<Transaction> getAllTransactions () {
-        return transactionService.getTransactions();
+    public Iterable<TransactionBean> getTransactionsByMail(@RequestParam String email) {
+          logger.info("liste des transaction chargée pour l'utilisateur "+email);
+            return transactionService.getTransactionList(email);
     }
 
     @GetMapping(path = "/transaction/id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
     public Optional<Transaction> getUserByMail(@RequestParam int id) {
+       logger.info("transaction n° "+id + "chargée");
         return transactionService.getTransactionById(id);
     }
 
 //    @DeleteMapping (path = "/transaction/id", consumes = MediaType.APPLICATION_JSON_VALUE,
 //            produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseStatus(code = HttpStatus.OK)
-//    public void deleteAUSer(@RequestParam int transactionId) {
+//    public boolean deleteAUSer(@RequestParam int transactionId) {
 //        transactionService.deleteById(transactionId);
+//        return true;
 //    }
 
 }

@@ -1,10 +1,15 @@
 package com.OcProject.PayMyBuddy.ControllerTestCase;
 
+import com.OcProject.PayMyBuddy.model.Contact;
+import com.OcProject.PayMyBuddy.model.ContactId;
 import com.OcProject.PayMyBuddy.model.User;
+import com.OcProject.PayMyBuddy.model.UserBean;
+import com.OcProject.PayMyBuddy.repository.UserRepository;
 import com.OcProject.PayMyBuddy.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.invocation.InvocationOnMock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,46 +39,36 @@ public class UserControllerTest {
     private UserService userServiceMock;
 
 
-//    @Test
-//    public void postAUser() throws Exception {
-//        User user = new User("fagotto","joffrey","jf@gmail.com","12345",50);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        String p =mapper.writeValueAsString(user);
-//
-//        when(userServiceMock.newUser(user)).thenReturn(user);
-//
-//        mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(p))
-//                .andExpect(status().isOk());
-//
-//
-//    }
+
 
     @Test
-    public void findUserById() throws Exception {
-        User user1 = new User("fagotto","joffrey","jf@gmail.com","12345",50);
+    public void postAUser() throws Exception {
+        UserBean user = new UserBean();
 
-        when(userServiceMock.getUserById(1)).thenReturn(Optional.of(user1));
+        ObjectMapper mapper = new ObjectMapper();
+        String p =mapper.writeValueAsString(user);
 
-        mockMvc.perform(get("/user/id").contentType(MediaType.APPLICATION_JSON_VALUE).param("id","1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.lastName").value("fagotto"));
+        when(userServiceMock.newUser(user)).thenReturn(user);
+
+        mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(p))
+                .andExpect(status().isOk());
+
+
     }
 
     @Test
-    public void findAllUsers() throws Exception {
+    public void getUser() throws Exception {
 
-        List<User> listOfUsers = new ArrayList<>();
-        User user1 = new User("fagotto1","joffrey1","jfag@gmail.com","545454",80);
-        User user2 = new User("fagotto1","joffrey1","jf@gmail.com","12345",50);
-        listOfUsers.add(user1);
-        listOfUsers.add(user2);
+       List<User> userList = new ArrayList<>();
 
-        when(userServiceMock.getUsers()).thenReturn(listOfUsers);
+        when(userServiceMock.getUsers()).thenReturn(userList);
 
-        mockMvc.perform(get("/user").contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk());
+        mockMvc.perform(get("/user").contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+
 
     }
+
 
     @Test
     public void findUserByLastnameAndFirstName() throws Exception {
@@ -83,8 +79,7 @@ public class UserControllerTest {
         listOfUsers.add(user1);
         listOfUsers.add(user2);
 
-        when(userServiceMock.findByLastNameAndFirstName("fagotto1", "jfag@gmail.com"))
-                .thenReturn((User) listOfUsers);
+        when(userServiceMock.findByLastNameAndFirstName("fagotto1","joffrey1")).thenReturn(user1);
 
         mockMvc.perform(get("/user/lastNameFirstName").contentType(MediaType.APPLICATION_JSON_VALUE).param("lastName","fagotto1").param("firstName","joffrey1"))
                 .andExpect(status().isOk());
@@ -117,6 +112,35 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    public void deleteUser() throws Exception {
+
+        User user = new User();
+        user.setMail("a@a.net");
+
+        when(userServiceMock.delete(user.getMail())).thenReturn(true);
+
+        mockMvc.perform(delete("/users").contentType(MediaType.APPLICATION_JSON_VALUE).param("userMail","a@a.net"))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void findMailWithLetters() throws Exception {
+
+        List<User> userList = new ArrayList<>();
+
+        User user = new User();
+        user.setMail("a@a.net");
+
+        userList.add(user);
+
+        when(userServiceMock.findByLikableMail(user.getMail())).thenReturn(userList);
+
+        mockMvc.perform(get("/users/contact").contentType(MediaType.APPLICATION_JSON_VALUE).param("email","a@a.net"))
+                .andExpect(status().isOk());
+
+    }
 
 
 }
