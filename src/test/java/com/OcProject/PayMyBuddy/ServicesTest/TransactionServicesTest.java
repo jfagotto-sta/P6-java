@@ -1,4 +1,4 @@
-package ServicesTest;
+package com.OcProject.PayMyBuddy.ServicesTest;
 
 
 import com.OcProject.PayMyBuddy.model.Transaction;

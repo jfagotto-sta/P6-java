@@ -1,4 +1,4 @@
-package ServicesTest;
+package com.OcProject.PayMyBuddy.ServicesTest;
 
 import com.OcProject.PayMyBuddy.model.User;
 import com.OcProject.PayMyBuddy.model.UserBean;
@@ -14,8 +14,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 @ActiveProfiles("test")
+@SpringBootTest
 public class UserServiceTest {
 
 
