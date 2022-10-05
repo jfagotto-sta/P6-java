@@ -24,10 +24,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
 
     @PostMapping (path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)

@@ -128,6 +128,29 @@ public void newCOntact() throws Exception {
 
         mockMvc.perform(get("/contact").contentType(MediaType.APPLICATION_JSON_VALUE).param("mail", "a@a.net"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getContactById() throws Exception {
+
+
+        ContactId contactId1 = new ContactId();
+        contactId1.setUser1("a");
+        contactId1.setUser2("b");
+
+        Contact contact = new Contact();
+        contact.setContactId(contactId1);
+        contact.setDate(new Date());
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        String c = mapper.writeValueAsString(contactId1);
+        System.out.println(c);
+
+        when(contactServiceMock.getById(contactId1)).thenReturn(Optional.of(contact));
+
+        mockMvc.perform(get("/contact/id").contentType(MediaType.APPLICATION_JSON_VALUE).content(c))
+                .andExpect(status().isOk());
 
     }
 

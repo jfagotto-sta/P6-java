@@ -64,16 +64,6 @@ public class UserServiceTest {
 
     }
 
-  //  @Test
-  //  public void findByMailTest(){
-   //     List<User> list = new ArrayList<>();
-//
-  //     User user =  userService.findByMail("13@1.net");
-  //     list.add(user);
-//
-  //     assertNotNull(list);
- //   }
-
     @Test
     public void findLikableMail(){
         List<User> user =  userService.findByLikableMail("13");

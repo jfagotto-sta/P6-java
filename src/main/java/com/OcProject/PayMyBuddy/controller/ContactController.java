@@ -51,7 +51,7 @@ public class ContactController {
     @GetMapping(path = "/contact/id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
-    public Optional<Contact> getContactById(@RequestParam ContactId id) {
+    public Optional<Contact> getContactById(@RequestBody ContactId id) {
         logger.info("Contact chargé");
         return contactService.getById(id);
     }
