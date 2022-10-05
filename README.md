@@ -6,4 +6,4 @@ L'application permet de
 - créer un compte,
 - se connecter,
 - trouver et ajouter des utilisateurs en ami,
-- effectuer un transfert d'arget à son ami.
+- effectuer un transfert d'argent à son ami.
