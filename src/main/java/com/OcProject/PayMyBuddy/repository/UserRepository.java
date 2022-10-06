@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
 
-	@Transactional
 	public User findByMail(String email);
 	
 	public User findByLastNameAndFirstName(String lastName, String firstName);

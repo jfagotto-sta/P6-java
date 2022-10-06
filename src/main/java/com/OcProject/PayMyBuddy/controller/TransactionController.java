@@ -48,7 +48,6 @@ public class TransactionController {
         return transactionService.getTransactions();
     }
 
-    //fonctionne avec un LIKE
     @GetMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.OK)
@@ -65,12 +64,5 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-//    @DeleteMapping (path = "/transaction/id", consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public boolean deleteAUSer(@RequestParam int transactionId) {
-//        transactionService.deleteById(transactionId);
-//        return true;
-//    }
 
 }

@@ -47,8 +47,6 @@ public class TransactionControllerTest {
         transactionBean.setSender("a@a.net");
         transactionBean.setRecipient("b@b.net");
 
-        double feesBeforeTransaction = userService.findByMail("admin@admin.fr").getBalance();
-
         ObjectMapper objectMapper = new ObjectMapper();
         String p = objectMapper.writeValueAsString(transactionBean);
 
@@ -57,7 +55,6 @@ public class TransactionControllerTest {
         mockMvc.perform(post("/transaction").contentType(MediaType.APPLICATION_JSON).content(p))
                 .andExpect(status().isOk());
 
-    //    assertNotEquals(userService.findByMail("admin@admin.fr").getBalance(), feesBeforeTransaction);
     }
 
     @Test
@@ -109,19 +106,5 @@ public class TransactionControllerTest {
                 .andExpect(jsonPath("$.amount").value(50));
     }
 
-//    @Test
-//    public void deleteTransactionById() throws Exception {
-//
-//        Date date = new Date();
-//        User user1 = new User();
-//        User user2 = new User();
-//        Transaction transaction = new Transaction(1,50,date,user1,user2,50);
-//
-//        when(transactionService.deleteById(1)).thenReturn(Optional.of(transaction));
-//
-//        mockMvc.perform(get("/transaction/id").contentType(MediaType.APPLICATION_JSON_VALUE).param("id","1"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.amount").value(50));
-//    }
 
 }

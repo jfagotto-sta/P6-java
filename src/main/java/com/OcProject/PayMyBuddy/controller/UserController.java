@@ -1,7 +1,6 @@
 package com.OcProject.PayMyBuddy.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.OcProject.PayMyBuddy.model.UserBean;
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.OcProject.PayMyBuddy.model.User;
@@ -95,6 +93,20 @@ public class UserController {
         logger.info("Utilisateur supprimé");
        userService.delete(userMail);
         return true;
+    }
+
+    @PostMapping(path = "/user/addmoney", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public void addMoney(@RequestParam String mail, @RequestParam Double montant) {
+        logger.info("L'utilisateur avec le mail "+mail+" a ajouté "+montant+" sur son compte PMB");
+        userService.addMoney(mail,montant);
+    }
+
+    @PostMapping(path = "/user/pulloffmoney", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public void pullOffMoney(@RequestParam String mail, @RequestParam Double montant) {
+        logger.info("L'utilisateur avec le mail "+mail+" a retiré "+montant+" sur son compte PMB");
+        userService.pullOfMoney(mail,montant);
     }
 
 

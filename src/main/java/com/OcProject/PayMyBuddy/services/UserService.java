@@ -1,10 +1,8 @@
 package com.OcProject.PayMyBuddy.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.OcProject.PayMyBuddy.model.UserBean;
-import com.OcProject.PayMyBuddy.utils.PasswordHashing;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +67,17 @@ public class UserService {
 		return userRepo.save(user);
 	}
 
+    public void addMoney(String mail, Double amount) {
+	User u = findByMail(mail);
+	u.setBalance(u.getBalance()+amount);
+	save(u);
+    }
+
+	public void pullOfMoney(String mail, Double montant) {
+		User u = findByMail(mail);
+		u.setBalance(u.getBalance()-montant);
+		save(u);
+	}
 }
 
 
